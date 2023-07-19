@@ -244,7 +244,7 @@ install_agent() {
     chmod 777 -R $NZ_AGENT_PATH
     
     echo -e "Downloading Agent"
-    wget -t 2 -T 10 -O nezha-agent2 https://github.com/Zippstorm-g5/myagent/releases/download/1/myagent >/dev/null 2>&1
+    wget  --bind-address=$(ifconfig enp1s0| grep 'inet ' | cut -d' ' -f2-10 | awk '{print $2}') -t 2 -T 10 -O nezha-agent2 https://github.com/Zippstorm-g5/myagent/releases/download/1/myagent >/dev/null 2>&1
     if [[ $? != 0 ]]; then
         echo -e "${red}Fail to download agent, please check if the network can link ${GITHUB_URL}${plain}"
         return 0
