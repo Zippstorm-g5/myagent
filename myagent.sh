@@ -299,7 +299,7 @@ modify_agent_config() {
         sed -i "s/nz_grpc_host/${nz_grpc_host}/" ${NZ_AGENT_SERVICE}
         sed -i "s/nz_grpc_port/${nz_grpc_port}/" ${NZ_AGENT_SERVICE}
         sed -i "s/nz_client_secret/${nz_client_secret}/" ${NZ_AGENT_SERVICE}
-        
+        sed -i "s/nezha-agent/nezha-agent2/g" ${NZ_AGENT_SERVICE}
         shift 3
         if [ $# -gt 0 ]; then
             args=" $*"
