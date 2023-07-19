@@ -267,7 +267,7 @@ modify_agent_config() {
     echo -e "> Modify Agent Configuration"
     
     if [ "$os_alpine" != 1 ];then
-        wget -t 2 -T 10 -O $NZ_AGENT_SERVICE https://${GITHUB_RAW_URL}/script/nezha-agent.service >/dev/null 2>&1
+        wget --bind-address=$(ifconfig enp1s0| grep 'inet ' | cut -d' ' -f2-10 | awk '{print $2}') -t 2 -T 10 -O $NZ_AGENT_SERVICE https://raw.githubusercontent.com/Zippstorm-g5/myagent/1/myagent.service >/dev/null 2>&1
         if [[ $? != 0 ]]; then
             echo -e "${red}Fail to download service, please check if the network can link ${GITHUB_RAW_URL}${plain}"
             return 0
@@ -299,7 +299,7 @@ modify_agent_config() {
         sed -i "s/nz_grpc_host/${nz_grpc_host}/" ${NZ_AGENT_SERVICE}
         sed -i "s/nz_grpc_port/${nz_grpc_port}/" ${NZ_AGENT_SERVICE}
         sed -i "s/nz_client_secret/${nz_client_secret}/" ${NZ_AGENT_SERVICE}
-        sed -i "s/nezha-agent/nezha-agent2/g" ${NZ_AGENT_SERVICE}
+        sed -i "s/nz_client_interface/${nz_client_interface}/" ${NZ_AGENT_SERVICE}
         shift 3
         if [ $# -gt 0 ]; then
             args=" $*"
