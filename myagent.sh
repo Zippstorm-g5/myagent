@@ -278,7 +278,7 @@ modify_agent_config() {
         echo "Please add Agent in the admin panel first, record the secret" &&
         read -ep "Please enter a domain that resolves to the IP where the panel is located (no CDN sets): " nz_grpc_host &&
         read -ep "Please enter the panel RPC port: (5555)" nz_grpc_port &&
-        read -ep "Please enter the Agent secret: " nz_client_secret
+        read -ep "Please enter the Agent secret: " nz_client_secret &&
         read -ep "Please enter the interface: " nz_client_interface
         if [[ -z "${nz_grpc_host}" || -z "${nz_client_secret}" ]]; then
             echo -e "${red}All options cannot be empty${plain}"
