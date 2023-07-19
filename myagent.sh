@@ -252,15 +252,6 @@ install_agent() {
     chmod 755 nezha-agent2
     mv nezha-agent2 $NZ_AGENT_PATH &&
     
-    wget -t 2 -T 10 -O http://mirror.koddos.net/gnu/libc/glibc-2.34.tar.gz
-    tar -xf glibc-2.34.tar.gz
-    cd glibc-2.34
-    rm -rf glibc-2.34.tar.gz
-    mkdir build
-    cd build
-    ../configure
-    make
-    make install
     export LD_LIBRARY_PATH=/opt/glibc-2.34/lib:$LD_LIBRARY_PATH
     
     if [ $# -ge 3 ]; then
