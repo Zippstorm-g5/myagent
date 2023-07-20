@@ -302,7 +302,7 @@ modify_agent_config() {
         sed -i "s/nz_grpc_port/${nz_grpc_port}/" ${NZ_AGENT_SERVICE}
         sed -i "s/nz_client_secret/${nz_client_secret}/" ${NZ_AGENT_SERVICE}
         sed -i "s/nz_client_interface/${nz_client_interface}/" ${NZ_AGENT_SERVICE}
-        shift 3
+        shift 4
         if [ $# -gt 0 ]; then
             args=" $*"
             sed -i "/ExecStart/ s/$/${args}/" ${NZ_AGENT_SERVICE}
