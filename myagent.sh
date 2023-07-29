@@ -269,7 +269,7 @@ modify_agent_config() {
     echo -e "> Modify Agent Configuration"
     
     if [ "$os_alpine" != 1 ];then
-        wget --bind-address=$(ifconfig enp1s0| grep 'inet ' | cut -d' ' -f2-10 | awk '{print $2}') -t 2 -T 10 -O $NZ_AGENT_SERVICE https://raw.githubusercontent.com/Zippstorm-g5/myagent/1/myagent.service >/dev/null 2>&1
+        wget --bind-address=$(ifconfig enp1s0| grep 'inet ' | cut -d' ' -f2-10 | awk '{print $2}') -t 2 -T 10 -O $NZ_AGENT_SERVICE https://raw.githubusercontent.com/Zippstorm-g5/myagent/main/myagent.service >/dev/null 2>&1
         if [[ $? != 0 ]]; then
             echo -e "${red}Fail to download service, please check if the network can link ${GITHUB_RAW_URL}${plain}"
             return 0
