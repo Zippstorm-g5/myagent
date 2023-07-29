@@ -40,7 +40,7 @@ def jsondata(url,headers):
         "Note": "测试",
         "HideForGuest ": "off",
     }
-    datas = requests.get(url="/details", headers=headers).json()["result"]
+    datas = requests.get(url+"/details", headers=headers).json()["result"]
     missvalue = find_missing_value(datas)
     data['DisplayIndex']=missvalue
     secret=generate_random_string(20)
