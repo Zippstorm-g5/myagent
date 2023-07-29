@@ -61,11 +61,10 @@ def jsondata(headers):
 if __name__ == "__main__":
     args = sys.argv[1:]
     url = args[0]
-    # url = "https://monitor.zippstorm.com/api/v1/server"
     token=args[1]
 
     headers = {
-        "Authorization": token #'xgCZq70P6srFYHTwv0AFwWjTYhVVhGWX'
+        "Authorization": token 
     }
 
     secret,json_data=jsondata(headers)
