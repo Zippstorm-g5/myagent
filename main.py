@@ -15,8 +15,8 @@ def find_missing_value(dict_list):
     # 将所有 "id" 的值加入一个集合
     id_values = set()
     for d in dict_list:
-        if "id" in d:
-            id_value = d["id"]
+        if "displayindex" in d:
+            id_value = d["displayindex"]
             if isinstance(id_value, int) and id_value <= 1000:
                 id_values.add(id_value)
 
@@ -40,7 +40,7 @@ def jsondata(url,headers):
         "Note": "测试",
         "HideForGuest ": "off",
     }
-    datas = requests.get(url+"/details", headers=headers).json()["result"]
+    datas = requests.get(url+"/list", headers=headers).json()["result"]
     missvalue = find_missing_value(datas)
     data['DisplayIndex']=missvalue
     secret=generate_random_string(20)
