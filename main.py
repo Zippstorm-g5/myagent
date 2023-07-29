@@ -5,6 +5,9 @@ import json
 import sys
 import os
 
+def display_options(options):
+    for i, option in enumerate(options, 1):
+        print(f"{i}. {option}")
 
 def generate_random_string(length):
     characters = string.ascii_letters + string.digits
@@ -26,8 +29,8 @@ def find_missing_value(dict_list):
         if i not in id_values:
             missing_value = i
             break
-
-    return missing_value
+    tags = [d["tag"] for d in dict_list if "tag" in d]
+    return missing_value,tags
 
 
 def jsondata(url,headers):
@@ -41,15 +44,28 @@ def jsondata(url,headers):
         "HideForGuest ": "off",
     }
     datas = requests.get(url+"/list", headers=headers).json()["result"]
-    missvalue = find_missing_value(datas)
+    missvalue,groups = find_missing_value(datas)
+    groupsnum=len(groups)
+    groups.append('新建组')
     data['DisplayIndex']=missvalue
     secret=generate_random_string(20)
     data['Secret']=secret
     data['Name'] = input("请输入服务器名：")
-    data['Tag'] = input("请输入服务器组：")
+    while True:
+        display_options(groups)
+        choice = input("请选择服务器组：")
+        choice_index = int(choice) - 1
+        if 0 <= choice_index < groupsnum:
+            data['Tag'] = groups[choice_index]
+            break
+        elif choice_index==groupsnum:
+            data['Tag']=input("请输入服务器组名：")
+            break
+        else:
+            pass
     data['Note'] = input("请输入服务器备注（回车为空）：")
     guest=input("请输入游客可见性（回车为Y/n,默认Y）：")
-    if guest in ['N', 'n']:
+    if guest=='N' or 'n':
         data['HideForGuest'] = "on"
     else:
         data['HideForGuest'] = "off"
@@ -69,6 +85,7 @@ if __name__ == "__main__":
 
     secret,json_data=jsondata(url,headers)
     response = requests.post(url, data=json_data, headers=headers)
+
     if args[2]==None:
         interface=' '
     else:
