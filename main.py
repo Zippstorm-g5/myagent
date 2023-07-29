@@ -30,7 +30,7 @@ def find_missing_value(dict_list):
     return missing_value
 
 
-def jsondata(headers):
+def jsondata(url,headers):
     data = {
         "ID": 0, #新添加所以ID为0
         "Name": "test",
@@ -40,7 +40,7 @@ def jsondata(headers):
         "Note": "测试",
         "HideForGuest ": "off",
     }
-    datas = requests.get("https://monitor.zippstorm.com/api/v1/server/details", headers=headers).json()["result"]
+    datas = requests.get(url+"/details", headers=headers).json()["result"]
     missvalue = find_missing_value(datas)
     data['DisplayIndex']=missvalue
     secret=generate_random_string(20)
@@ -67,12 +67,12 @@ if __name__ == "__main__":
         "Authorization": token 
     }
 
-    secret,json_data=jsondata(headers)
+    secret,json_data=jsondata(url,headers)
     response = requests.post(url, data=json_data, headers=headers)
     if args[2]==None:
         interface=' '
     else:
         interface=args[2]
-    command = "curl -L https://raw.githubusercontent.com/Zippstorm-g5/myagent/1/myagent.sh -o nezha.sh && " \
+    command = "curl -L https://raw.githubusercontent.com/Zippstorm-g5/myagent/main/myagent.sh -o nezha.sh && " \
               "chmod +x nezha.sh && ./nezha.sh install_agent example.com 5555 %s %s --tls" % (secret, interface)
     os.system(command)
