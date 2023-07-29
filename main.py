@@ -29,7 +29,7 @@ def find_missing_value(dict_list):
         if i not in id_values:
             missing_value = i
             break
-    tags = [d["tag"] for d in dict_list if "tag" in d]
+    tags = list(set([d["tag"] for d in dict_list if "tag" in d]))
     return missing_value,tags
 
 
