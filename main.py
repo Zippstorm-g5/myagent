@@ -49,7 +49,7 @@ def jsondata(url,headers):
     data['Tag'] = input("请输入服务器组：")
     data['Note'] = input("请输入服务器备注（回车为空）：")
     guest=input("请输入游客可见性（回车为Y/n,默认Y）：")
-    if guest=='N' or 'n':
+    if guest in ['N', 'n']:
         data['HideForGuest'] = "on"
     else:
         data['HideForGuest'] = "off"
