@@ -39,32 +39,32 @@ def jsondata(url,headers):
         "Name": "test",
         "DisplayIndex": 6000,
         "Secret": 'qL6r8aaGw6PdyYzpAh',
-        "Tag": '测试',
-        "Note": "测试",
+        "Tag": 'test',
+        "Note": "test",
         "HideForGuest ": "off",
     }
     datas = requests.get(url+"/list", headers=headers).json()["result"]
     missvalue,groups = find_missing_value(datas)
     groupsnum=len(groups)
-    groups.append('新建组')
+    groups.append('New group')
     data['DisplayIndex']=missvalue
-    secret=generate_random_string(20)
+    secret=generate_random_string(18)
     data['Secret']=secret
-    data['Name'] = input("请输入服务器名：")
+    data['Name'] = input("Key in a server name:")
     while True:
         display_options(groups)
-        choice = input("请选择服务器组：")
+        choice = input("Select a server group:")
         choice_index = int(choice) - 1
         if 0 <= choice_index < groupsnum:
             data['Tag'] = groups[choice_index]
             break
         elif choice_index==groupsnum:
-            data['Tag']=input("请输入服务器组名：")
+            data['Tag']=input("Key in a server group name:")
             break
         else:
             pass
-    data['Note'] = input("请输入服务器备注（回车为空）：")
-    guest=input("请输入游客可见性（回车为Y/n,默认Y）：")
+    data['Note'] = input("Key in the note:")
+    guest=input("Show For Guest? default：Y")
     if guest in ['N', 'n']:
         data['HideForGuest'] = "on"
     else:
