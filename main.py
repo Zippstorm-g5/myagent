@@ -5,6 +5,8 @@ import json
 import sys
 import os
 
+sys.stdout.reconfigure(encoding='utf-8')
+
 def display_options(options):
     for i, option in enumerate(options, 1):
         print(f"{i}. {option}")
