@@ -80,7 +80,7 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     url = args[0]
     token=args[1]
-    os.system(command)
+
     headers = {
         "Authorization": token
     }
