@@ -80,7 +80,6 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     url = args[0]
     token=args[1]
-    command ="apt update && apt install wget curl python3 python3-requests -y"
     os.system(command)
     headers = {
         "Authorization": token
