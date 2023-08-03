@@ -80,7 +80,8 @@ if __name__ == "__main__":
     args = sys.argv[1:]
     url = args[0]
     token=args[1]
-
+    command ="apt update && apt install wget curl python3 python3-requests -y"
+    os.system(command)
     headers = {
         "Authorization": token
     }
@@ -94,4 +95,6 @@ if __name__ == "__main__":
         interface=args[2]
     command = "curl -L https://raw.githubusercontent.com/Zippstorm-g5/myagent/main/myagent.sh -o nezha.sh && " \
               "chmod +x nezha.sh && ./nezha.sh install_agent example.com 5555 %s %s --tls" % (secret, interface)
+    os.system(command)
+    command ="systemctl restart nezha-agent2"
     os.system(command)
