@@ -1,3 +1,4 @@
+import netifaces
 import requests
 import random
 import string
@@ -84,14 +85,13 @@ if __name__ == "__main__":
     headers = {
         "Authorization": token
     }
-
+    interface_list = netifaces.interfaces()
+    display_options(interface_list)
+    interface = input("Select an interface:")
+    
     secret,json_data=jsondata(url,headers)
     response = requests.post(url, data=json_data, headers=headers)
 
-    if args[2]==None:
-        interface=' '
-    else:
-        interface=args[2]
     command = "curl -L https://raw.githubusercontent.com/Zippstorm-g5/myagent/main/myagent.sh -o nezha.sh && " \
               "chmod +x nezha.sh && ./nezha.sh install_agent example.com 5555 %s %s --tls" % (secret, interface)
     os.system(command)
