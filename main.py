@@ -89,7 +89,7 @@ if __name__ == "__main__":
     display_options(interface_list)
     num = input("Select an interface:")
     index = int(num) - 1
-    if 0 <= index < groupsnum:
+    if 0 <= index < len(interface_list):
         interface = interface_list[index]
     else:
         interface=''
