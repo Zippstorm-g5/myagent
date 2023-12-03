@@ -78,10 +78,9 @@ def jsondata(url,headers):
 
 
 if __name__ == "__main__":
-    args = sys.argv[1:]
-    url = args[0]
-    token=args[1]
-
+    url = os.getenv('SERVER_URL')
+    token = os.getenv('TOKEN')
+    
     headers = {
         "Authorization": token
     }
