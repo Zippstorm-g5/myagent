@@ -14,6 +14,6 @@ TOKEN=$2
 apt update && apt install wget curl python3 python3-requests python3-netifaces -y
 
 # 下载Python脚本，赋予执行权限并执行
-wget -L https://raw.githubusercontent.com/Zippstorm-g5/myagent/main/main.py
+wget -OL https://raw.githubusercontent.com/Zippstorm-g5/myagent/main/main.py
 chmod +x main.py
 python3 main.py $SERVER_URL $TOKEN
