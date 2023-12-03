@@ -87,7 +87,12 @@ if __name__ == "__main__":
     }
     interface_list = netifaces.interfaces()
     display_options(interface_list)
-    interface = input("Select an interface:")
+    num = input("Select an interface:")
+    index = int(num) - 1
+    if 0 <= index < groupsnum:
+        interface = interface_list[index]
+    else:
+        interface=''
     
     secret,json_data=jsondata(url,headers)
     response = requests.post(url, data=json_data, headers=headers)
